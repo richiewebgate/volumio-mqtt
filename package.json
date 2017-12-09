@@ -1,0 +1,27 @@
+{
+  "name": "volumio-mqtt",
+  "version": "1.0.0",
+  "description": "NodeJS MQTT adapter for volumio.org player",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richiewebgate/volumio-mqtt.git"
+  },
+  "keywords": [
+    "volumio",
+    "mqtt"
+  ],
+  "author": "flexion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richiewebgate/volumio-mqtt/issues"
+  },
+  "homepage": "https://github.com/richiewebgate/volumio-mqtt#readme",
+  "dependencies": {
+    "mqtt": "^2.14.0",
+    "socket.io-client": "^2.0.4"
+  }
+}

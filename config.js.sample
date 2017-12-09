@@ -1,0 +1,6 @@
+module.exports = {
+    "volumio_host": 'http://localhost:3000',
+    "mqtt_devicename": "radio-01",
+    "mqttHost": "mqtt://user:password@mqttserver:port",
+    "debug":false
+}
