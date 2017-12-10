@@ -9,14 +9,21 @@ Define mqtt_devicename (the prefix for mqtt messages) and mqttHost with the addr
 
 config.js is listed in the .gitignore list and will not be overwritten when you pull from the git repository. 
 
-# Install PM" process manager
-Optional: You can use PM2 to run this script automatically on each reboot
+# Install PM2 process manager
+Optional: You can use PM2 to run this script automatically on each reboot.
 
 $ sudo npm install pm2 -g
-$ sudo pm2 startup
+
+$ pm2 startup
+
+[PM2] Init System found: systemd
+[PM2] To setup the Startup Script, copy/paste the following command:
+sudo env PATH=$PATH:/bin /lib/node_modules/pm2/bin/pm2 startup systemd -u volumio --hp /home/volumio
+
 $ pm2 start pm2-process.json
 $ pm2 list 
 $ pm2 save
+
 
 # MQTT Topics:
 
