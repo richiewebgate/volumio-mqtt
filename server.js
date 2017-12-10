@@ -1,4 +1,4 @@
-var version = "2017-12-09 20:52";
+var version = "2017-12-10 13:28";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -10,7 +10,7 @@ mqttClient.subscribe(config.mqtt_devicename+"/set/#");
 mqttClient.subscribe(config.mqtt_devicename+"/get/#");
 
 mqttClient.on('message', function (topic, rawMessage) {
-    msg = rawMessage.toString();
+    var msg = rawMessage.toString();
     if (config.debug) console.log("[MQTT] Received topic:" + topic.toString(), msg);
     var arr = topic.split('/');
     var action = arr[2];
