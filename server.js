@@ -1,4 +1,4 @@
-var version = "2017-12-10 13:28";
+var version = "2017-12-11 11:44";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -12,7 +12,7 @@ mqttClient.subscribe(config.mqtt_tvenabledtopic);
 
 mqttClient.on('message', function (topic, rawMessage) {
     var msg = rawMessage.toString();
-    if (config.debug) console.log("[MQTT] Received topic:" + topic.toString(), msg);
+    if (config.debug) printLog( "Received MQTT topic: " + topic.toString() );
 
     if (topic===config.mqtt_tvenabledtopic) {
         // Turn off radio player when TV is turned on
@@ -25,7 +25,6 @@ mqttClient.on('message', function (topic, rawMessage) {
     if (arr[1]=="set") {        
         if (action==="volume") { // numeric value between 0 and 100, mute, umute, +, -
             if (arr[3]==="percent") {
-                console.log("[MQTT] setVolume", msg);
                 socket.emit('volume', Number(msg) );
             } else if (arr[3]==="mute") { // true | false
                 socket.emit('volume', msg==="true"?"mute":"umute" );
@@ -56,11 +55,11 @@ mqttClient.on('message', function (topic, rawMessage) {
     }
 });
 socket.on('connect', function(){
-    console.log("["+config.mqtt_devicename+"] Connected");
+    printLog( config.mqtt_devicename + " connected" );
     mqttClient.publish(config.mqtt_devicename+"/status/connected", "true", { retain: false });
 });
 socket.on('disconnect', function(){
-    console.log("["+config.mqtt_devicename+"] Disconnected");
+    printLog( config.mqtt_devicename + " disconnected" );
     mqttClient.publish(config.mqtt_devicename+"/status/connected", "false", { retain: false });
 });
 socket.on('pushState', function(data){
@@ -72,3 +71,7 @@ socket.on('pushMultiRoomDevices', function(data){
 socket.on('pushBrowseSources', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/browsesources", JSON.stringify(data), { retain: false });
 });
+
+function printLog(txt) {
+    console.log( "["+ new Date().toLocaleString() +"]", txt);
+}
