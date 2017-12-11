@@ -34,10 +34,15 @@ $ pm2 save
 
 Setters:
 
+  Topic                                 Payload
+
 - {devicename}/set/volume/percent       0 - 100
 - {devicename}/set/volume/mute          true | false
 - {devicename}/set/volume/push          + | -
+- {devicename}/set/volume/up
+- {devicename}/set/volume/down
 
+- {devicename}/set/power                true | false
 - {devicename}/set/play
 - {devicename}/set/stop
 - {devicename}/set/pause

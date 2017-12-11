@@ -23,6 +23,10 @@ mqttClient.on('message', function (topic, rawMessage) {
                 socket.emit('volume', msg==="true"?"mute":"umute" );
             } else if (arr[3]==="push") { // + | -
                 socket.emit('volume', msg );
+            } else if (arr[3]==="up") {
+                socket.emit('volume', "+" );
+            } else if (arr[3]==="down") {
+                socket.emit('volume', "-" );
             }
         } else if (action=="play") {
             socket.emit('play');
@@ -30,6 +34,8 @@ mqttClient.on('message', function (topic, rawMessage) {
             socket.emit('pause');
         } else if (action=="stop") {
             socket.emit('stop');
+        } else if (action=="power") {
+            socket.emit( msg==="true"?'play':'stop');
         }
     } else if (arr[1]==="get") {
         if (arr[2]==="status") {
