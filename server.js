@@ -8,10 +8,18 @@ var mqttClient = mqtt.connect(config.mqttHost);
 
 mqttClient.subscribe(config.mqtt_devicename+"/set/#");
 mqttClient.subscribe(config.mqtt_devicename+"/get/#");
+mqttClient.subscribe(config.mqtt_tvenabledtopic);
 
 mqttClient.on('message', function (topic, rawMessage) {
     var msg = rawMessage.toString();
     if (config.debug) console.log("[MQTT] Received topic:" + topic.toString(), msg);
+
+    if (topic===config.mqtt_tvenabledtopic) {
+        // Turn off radio player when TV is turned on
+        if (msg==="true") socket.emit('stop');
+        return;
+    }
+
     var arr = topic.split('/');
     var action = arr[2];
     if (arr[1]=="set") {        
