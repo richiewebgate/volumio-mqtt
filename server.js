@@ -43,6 +43,7 @@ mqttClient.on('message', function (topic, rawMessage) {
             setOutlet("true");
         } else if (action=="pause") {
             socket.emit('pause');
+            setOutlet("false");
         } else if (action=="stop") {
             socket.emit('stop');
             setOutlet("false");
