@@ -40,13 +40,13 @@ mqttClient.on('message', function (topic, rawMessage) {
             }
         } else if (action=="play") {
             socket.emit('play');
-            setOutlet("true");
+            setOutlet(true);
         } else if (action=="pause") {
             socket.emit('pause');
-            setOutlet("false");
+            setOutlet(false);
         } else if (action=="stop") {
             socket.emit('stop');
-            setOutlet("false");
+            setOutlet(false);
         } else if (action=="power") {
             socket.emit( msg==="true"?'play':'stop');
             setOutlet(msg==="true");
