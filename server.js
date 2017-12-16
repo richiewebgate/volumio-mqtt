@@ -16,10 +16,7 @@ mqttClient.on('message', function (topic, rawMessage) {
 
     if (topic===config.mqtt_tvenabledtopic) {
         // Turn off radio player when TV is turned on
-        if (msg==="true") {
-            socket.emit('stop');
-            setOutlet(false);
-        }
+        if (msg==="true") socket.emit('stop');
         return;
     }
 
@@ -40,16 +37,12 @@ mqttClient.on('message', function (topic, rawMessage) {
             }
         } else if (action=="play") {
             socket.emit('play');
-            setOutlet(true);
         } else if (action=="pause") {
             socket.emit('pause');
-            setOutlet(false);
         } else if (action=="stop") {
             socket.emit('stop');
-            setOutlet(false);
         } else if (action=="power") {
             socket.emit( msg==="true"?'play':'stop');
-            setOutlet(msg==="true");
         }
     } else if (arr[1]==="get") {
         if (arr[2]==="status") {
@@ -71,6 +64,11 @@ socket.on('disconnect', function(){
 });
 socket.on('pushState', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/info", JSON.stringify(data), { retain: false });
+    if (data.status==="play") {
+        setOutlet(true);
+    } else if (data.status==="stop") {
+        setOutlet(false);
+    }
 });
 socket.on('pushMultiRoomDevices', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/multiroomdevices", JSON.stringify(data), { retain: false });
