@@ -16,7 +16,10 @@ mqttClient.on('message', function (topic, rawMessage) {
 
     if (topic===config.mqtt_tvenabledtopic) {
         // Turn off radio player when TV is turned on
-        if (msg==="true") socket.emit('stop');
+        if (msg==="true") {
+            socket.emit('stop');
+            setOutlet(false);
+        }
         return;
     }
 
@@ -37,12 +40,15 @@ mqttClient.on('message', function (topic, rawMessage) {
             }
         } else if (action=="play") {
             socket.emit('play');
+            setOutlet("true");
         } else if (action=="pause") {
             socket.emit('pause');
         } else if (action=="stop") {
             socket.emit('stop');
+            setOutlet("false");
         } else if (action=="power") {
             socket.emit( msg==="true"?'play':'stop');
+            setOutlet(msg==="true");
         }
     } else if (arr[1]==="get") {
         if (arr[2]==="status") {
@@ -71,7 +77,12 @@ socket.on('pushMultiRoomDevices', function(data){
 socket.on('pushBrowseSources', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/browsesources", JSON.stringify(data), { retain: false });
 });
-
+function setOutlet(bON) {
+    if (config.mqtt_powerToggleAddr!=="") {
+        printLog("Turning outlet "+ (bON?"ON":"OFF"));
+        mqttClient.publish(config.mqtt_powerToggleAddr, (bON?"true":"false"), { retain: false });
+    }
+};
 function printLog(txt) {
     console.log( "["+ new Date().toLocaleString() +"]", txt);
 }
