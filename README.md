@@ -47,6 +47,8 @@ Setters:
 - {devicename}/set/stop
 - {devicename}/set/pause
 
+- {devicename}/set/seek                 seconds (number)
+
 Getters: 
 
 - {devicename}/get/status
@@ -65,3 +67,12 @@ Status responses:
 
 Volumio player API reference
 https://volumio.github.io/docs/API/WebSocket_APIs.html
+
+
+Additional options in config.js:
+
+- mqtt_tvenabledtopic
+You can configure the volumio playback to stop when you turn on your TV (or by any other device, e.g. on an incoming phone call) by specifying a topic name to listen for. The device will listen on MQTT for the specified topic and stop playback (assuming your TV will send out an MQTT message on power up). Currently limited to a single MQTT topic name.
+
+- mqtt_powerToggleAddr
+You can configure to emit an MQTT message on play and stop of volumio by specifying an outgoing MQTT topic name in "mqtt_powerToggleAddr". This can be used to turn on/off a power outlet (e.g. your amplifier). Currently limited to a single MQTT topic.
