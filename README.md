@@ -34,20 +34,20 @@ $ pm2 save
 
 Setters:
 
-  Topic                                 Payload
+  Topic                                | (Payload)
 
-- {devicename}/set/volume/percent       0 - 100
-- {devicename}/set/volume/mute          true | false
-- {devicename}/set/volume/push          + | -
+- {devicename}/set/volume/percent       (0 - 100)
+- {devicename}/set/volume/mute          (true | false)
+- {devicename}/set/volume/push          (+ | -)
 - {devicename}/set/volume/up
 - {devicename}/set/volume/down
 
-- {devicename}/set/power                true | false
+- {devicename}/set/power                (true | false)
 - {devicename}/set/play
 - {devicename}/set/stop
 - {devicename}/set/pause
 
-- {devicename}/set/seek                 seconds (number)
+- {devicename}/set/seek                 (seconds)
 
 Getters: 
 
@@ -58,7 +58,7 @@ Getters:
 
 Status responses:
 
-- {devicename}/status/connected         true | false
+- {devicename}/status/connected
 - {devicename}/status/info
 - {devicename}/status/browsesources
 - {devicename}/status/browselibrary
@@ -71,8 +71,8 @@ https://volumio.github.io/docs/API/WebSocket_APIs.html
 
 Additional options in config.js:
 
-- mqtt_tvenabledtopic
+- mqtt_tvenabledtopic:
 You can configure the volumio playback to stop when you turn on your TV (or by any other device, e.g. on an incoming phone call) by specifying a topic name to listen for. The device will listen on MQTT for the specified topic and stop playback (assuming your TV will send out an MQTT message on power up). Currently limited to a single MQTT topic name.
 
-- mqtt_powerToggleAddr
+- mqtt_powerToggleAddr:
 You can configure to emit an MQTT message on play and stop of volumio by specifying an outgoing MQTT topic name in "mqtt_powerToggleAddr". This can be used to turn on/off a power outlet (e.g. your amplifier). Currently limited to a single MQTT topic.
