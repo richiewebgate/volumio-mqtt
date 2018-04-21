@@ -1,4 +1,4 @@
-var version = "2018-04-20 15:46";
+var version = "2018-04-21 14:19";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -8,7 +8,7 @@ var mqttClient = mqtt.connect(config.mqttHost);
 
 mqttClient.subscribe(config.mqtt_devicename+"/set/#");
 mqttClient.subscribe(config.mqtt_devicename+"/get/#");
-mqttClient.subscribe(config.mqtt_tvenabledtopic);
+if (config.mqtt_tvenabledtopic!=="") mqttClient.subscribe(config.mqtt_tvenabledtopic);
 
 mqttClient.on('message', function (topic, rawMessage) {
     var msg = rawMessage.toString();
