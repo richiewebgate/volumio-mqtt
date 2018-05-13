@@ -44,10 +44,13 @@ Setters:
 
 - {devicename}/set/power                (true | false)
 - {devicename}/set/play
+- {devicename}/set/addPlay              {"service": "webradio", "title": radioURI, "uri": url}
 - {devicename}/set/stop
 - {devicename}/set/pause
 
 - {devicename}/set/seek                 (seconds)
+- {devicename/set/addPlaylist}          (name of playlist)
+
 
 Getters: 
 
