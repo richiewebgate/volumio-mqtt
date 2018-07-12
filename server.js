@@ -42,7 +42,7 @@ mqttClient.on('message', function (topic, rawMessage) {
                 if (msg != "" && !isNaN(num))
                 {
                     if (config.debug) printLog("Play with number " + num.toString());
-                    socket.emit('play', num);
+                    socket.emit('play', {value: num});
                 } else {
                     if (config.debug) printLog("Play without number");
                     socket.emit('play');
