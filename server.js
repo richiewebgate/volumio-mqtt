@@ -37,7 +37,16 @@ mqttClient.on('message', function (topic, rawMessage) {
                     socket.emit('volume', "-" );
                 }
             } else if (action=="play") {
-                socket.emit('play');
+                var num = Number(msg);
+                if (config.debug) printLog("Message: " + msg + " | Number: " + num.toString());
+                if (msg != "" && !isNaN(num))
+                {
+                    if (config.debug) printLog("Play with number " + num.toString());
+                    socket.emit('play', {value: num});
+                } else {
+                    if (config.debug) printLog("Play without number");
+                    socket.emit('play');
+                }
             } else if (action=="pause") {
                 socket.emit('pause');
             } else if (action=="stop") {
