@@ -43,7 +43,7 @@ Setters:
 - {devicename}/set/volume/down
 
 - {devicename}/set/power                (true | false)
-- {devicename}/set/play
+- {devicename}/set/play                 Optional: Number of track in queue to play
 - {devicename}/set/addPlay              {"service": "webradio", "title": radioURI, "uri": url}
 - {devicename}/set/stop
 - {devicename}/set/pause
@@ -79,3 +79,6 @@ You can configure the volumio playback to stop when you turn on your TV (or by a
 
 - mqtt_powerToggleAddr:
 You can configure to emit an MQTT message on play and stop of volumio by specifying an outgoing MQTT topic name in "mqtt_powerToggleAddr". This can be used to turn on/off a power outlet (e.g. your amplifier). Currently limited to a single MQTT topic.
+
+
+Additional project contributors: morphZ
