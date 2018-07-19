@@ -63,6 +63,7 @@ Status responses:
 
 - {devicename}/status/connected
 - {devicename}/status/info
+- {devicename}/status/volume
 - {devicename}/status/browsesources
 - {devicename}/status/browselibrary
 - {devicename}/status/multiroomdevices
