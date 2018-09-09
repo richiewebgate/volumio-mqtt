@@ -3,11 +3,23 @@ NodeJS MQTT adapter for volumio.org music player, to control your player using M
 
 For example, if you have configured your mqtt_devicename in config.js to "player-01", you can control it by sending MQTT messages to topic "player-01/set/play" to start playback, or "player-01/set/volume/percent" and a payload of 50 to set volume to 50%.
 
+# Installation
+
+First clone the repo into a directory of your choice (e.g. /opt/node/)
+
+$ git clone https://github.com/richiewebgate/volumio-mqtt.git
+
+Then go into the volumio-mqtt directory and install dependencies
+
+$ npm install
+
 # Configuration
 Copy config.js.sample to config.js and adjust your settings:
 Define mqtt_devicename (the prefix for mqtt messages) and mqttHost with the address of your mqtt broker.
 
 config.js is listed in the .gitignore list and will not be overwritten when you pull from the git repository. 
+
+At this point you could start volumio-mqtt using node for a test run, but since you want it to automatically start after each reboot, you should install the PM2 process manager. 
 
 # Install PM2 process manager
 Optional: You can use PM2 to run this script automatically on each reboot.
