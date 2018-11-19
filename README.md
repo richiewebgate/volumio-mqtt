@@ -68,7 +68,6 @@ Getters:
 
 - {devicename}/get/status
 - {devicename}/get/browsesources
-- {devicename}/get/browselibrary
 - {devicename}/get/multiroomdevices
 
 Status responses:
@@ -77,7 +76,6 @@ Status responses:
 - {devicename}/status/info
 - {devicename}/status/volume
 - {devicename}/status/browsesources
-- {devicename}/status/browselibrary
 - {devicename}/status/multiroomdevices
 
 

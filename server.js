@@ -1,4 +1,4 @@
-var version = "2018-11-19 08:59";
+var version = "2018-11-19 09:08";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -68,8 +68,6 @@ mqttClient.on('message', function (topic, rawMessage) {
                 socket.emit('getMultiRoomDevices');
             } else if (arr[2]==="browsesources") {
                 socket.emit('getBrowseSources');
-            } else if (arr[2]==="browselibrary") {
-                socket.emit('getBrowseLibrary');
             }
         }
     } catch (e) {
@@ -101,9 +99,6 @@ socket.on('pushMultiRoomDevices', function(data){
 });
 socket.on('pushBrowseSources', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/browsesources", JSON.stringify(data), { retain: false });
-});
-socket.on('pushBrowseLibrary', function(data){
-    mqttClient.publish(config.mqtt_devicename+"/status/browselibrary", JSON.stringify(data), { retain: false });
 });
 function setOutlet(bON) {
     if (config.mqtt_powerToggleAddr!=="") {
