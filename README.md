@@ -61,7 +61,7 @@ Setters:
 - {devicename}/set/pause
 
 - {devicename}/set/seek                 (seconds)
-- {devicename/set/addPlaylist}          (name of playlist)
+- {devicename}/set/playPlaylist
 
 
 Getters: 
