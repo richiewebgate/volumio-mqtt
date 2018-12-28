@@ -1,4 +1,4 @@
-var version = "2018-11-19 09:08";
+var version = "2018-12-28 21:35";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -28,7 +28,7 @@ mqttClient.on('message', function (topic, rawMessage) {
                 if (arr[3]==="percent") {
                     socket.emit('volume', Number(msg) );
                 } else if (arr[3]==="mute") { // true | false
-                    socket.emit('volume', msg==="true"?"mute":"umute" );
+                    socket.emit('volume', msg==="true"?"mute":"unmute" );
                 } else if (arr[3]==="push") { // + | -
                     socket.emit('volume', msg );
                 } else if (arr[3]==="up") {
