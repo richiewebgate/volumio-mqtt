@@ -75,6 +75,7 @@ Status responses:
 - {devicename}/status/connected
 - {devicename}/status/info
 - {devicename}/status/volume
+- {devicename}/status/volume/mute
 - {devicename}/status/browsesources
 - {devicename}/status/multiroomdevices
 
