@@ -93,6 +93,10 @@ socket.on('pushState', function(data){
     vol = Number(data.volume);
     if ( !isNaN(vol) )
         mqttClient.publish(config.mqtt_devicename+"/status/volume", vol.toString(), {retain: false});
+    
+    mut = Boolean(data.mute);
+    if ( typeof mut === "boolean" )
+        mqttClient.publish(config.mqtt_devicename+"/status/volume/mute", mut.toString(), {retain: false});
 });
 socket.on('pushMultiRoomDevices', function(data){
     mqttClient.publish(config.mqtt_devicename+"/status/multiroomdevices", JSON.stringify(data), { retain: false });
