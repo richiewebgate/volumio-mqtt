@@ -93,4 +93,4 @@ You can configure the volumio playback to stop when you turn on your TV (or by a
 You can configure to emit an MQTT message on play and stop of volumio by specifying an outgoing MQTT topic name in "mqtt_powerToggleAddr". This can be used to turn on/off a power outlet (e.g. your amplifier). Currently limited to a single MQTT topic.
 
 
-Additional project contributors: morphZ
+Additional project contributors: morphZ, war6000
