@@ -59,7 +59,8 @@ Setters:
 - {devicename}/set/addPlay              {"service": "webradio", "title": radioURI, "uri": url}
 - {devicename}/set/stop
 - {devicename}/set/pause
-
+- {devicename}/set/next
+- {devicename}/set/prev
 - {devicename}/set/seek                 (seconds)
 - {devicename}/set/playPlaylist
 

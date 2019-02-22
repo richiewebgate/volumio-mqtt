@@ -1,4 +1,4 @@
-var version = "2019-02-08 06:59";
+var version = "2019-02-22 12:07";
 var config = require('./config');
 var mqtt = require('mqtt');
 var io=require('socket.io-client');
@@ -51,6 +51,10 @@ mqttClient.on('message', function (topic, rawMessage) {
                 socket.emit('pause');
             } else if (action=="stop") {
                 socket.emit('stop');
+            } else if (action=="prev") {
+                socket.emit('prev');
+            } else if (action=="next") {
+                socket.emit('next');
             } else if (action=="power") {
                 socket.emit( msg==="true"?'play':'stop');
             } else if (action=="seek") {
