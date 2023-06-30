@@ -63,7 +63,7 @@ Setters:
 - {devicename}/set/prev
 - {devicename}/set/seek                 (seconds)
 - {devicename}/set/playPlaylist
-
+- {devicename}/callMethod               {"endpoint":"category/name", "method":"methodName", "data": {}}
 
 Getters: 
 
