@@ -1,15 +1,15 @@
-var version = "2021-01-15 06:47";
-var config = require('./config');
-var mqtt = require('mqtt');
-var io = require('socket.io-client');
+let version = "2023-06-30 08:01";
+let  config = require('./config');
+let  mqtt = require('mqtt');
+let  io = require('socket.io-client');
 
 printLog("Starting volumio-mqtt");
 
 printLog("Connecting to MQTT server..");
-var mqttClient = mqtt.connect(config.mqttHost);
+let  mqttClient = mqtt.connect(config.mqttHost);
 
 printLog("Connecting to volumio player " + config.volumio_host);
-var socket = io.connect(config.volumio_host);
+let  socket = io.connect(config.volumio_host);
 
 mqttClient.on("connect", function() { printLog("Connected to MQTT server.")});
 mqttClient.subscribe(config.mqtt_devicename + "/set/#");
@@ -18,7 +18,7 @@ if (config.mqtt_tvenabledtopic !== "") mqttClient.subscribe(config.mqtt_tvenable
 
 mqttClient.on('message', function (topic, rawMessage) {
     try {
-        var msg = rawMessage.toString();
+        let  msg = rawMessage.toString();
         if (config.debug) printLog("Received MQTT topic: " + topic.toString());
 
         if (topic === config.mqtt_tvenabledtopic) {
@@ -27,8 +27,8 @@ mqttClient.on('message', function (topic, rawMessage) {
             return;
         }
 
-        var arr = topic.split('/');
-        var action = arr[2];
+        let  arr = topic.split('/');
+        let  action = arr[2];
         if (arr[1] == "set") {
             if (action === "volume") { // numeric value between 0 and 100, mute, umute, +, -
                 if (arr[3] === "percent") {
@@ -43,7 +43,7 @@ mqttClient.on('message', function (topic, rawMessage) {
                     socket.emit('volume', "-");
                 }
             } else if (action == "play") {
-                var num = Number(msg);
+                let  num = Number(msg);
                 if (config.debug) printLog("Message: " + msg + " | Number: " + num.toString());
                 if (msg != "" && !isNaN(num)) {
                     if (config.debug) printLog("Play with number " + num.toString());
@@ -69,6 +69,10 @@ mqttClient.on('message', function (topic, rawMessage) {
             } else if (action == "addPlay") {
                 // e.g. {"service":"webradio","title":webradioname,"uri":webradioUri}
                 socket.emit('addPlay', JSON.parse(msg));
+            } else if (action == "callMethod") {
+                // call plugin method (untested)
+                // e.g. { "endpoint":"category/name", "method":"methodName", "data": {}}
+                socket.emit('callMethod', JSON.parse(msg));
             }
         } else if (arr[1] === "get") {
             if (arr[2] === "status") {
